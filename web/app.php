@@ -8,7 +8,10 @@ if (PHP_VERSION_ID < 70000) {
     include_once __DIR__.'/../var/bootstrap.php.cache';
 }
 
-$env   = strtolower(getenv('APP_ENV'));
+$env = strtolower(getenv('APP_ENV'));
+if (!$env) {
+    $env = 'dev';
+}
 $debug = 'dev' === $env;
 
 if ('prod' === $dev) {
