@@ -10,7 +10,7 @@ composer install
 ## Development
 Once the dependencies are installed, you can run the server by executing:
 ```
-bin/console server:run localhost:8000
+bin/console server:run
 ```
 API requests can now be accessed via `http://localhost:8000`. By default, the application will run in `dev` mode. This can be changed by setting the `APP_ENV` environment variable to `prod`.
 
