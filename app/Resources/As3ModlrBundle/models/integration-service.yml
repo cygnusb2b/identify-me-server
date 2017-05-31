@@ -1,0 +1,12 @@
+integration-service:
+    entity:
+        abstract: true
+        polymorphic: true
+        persistence:
+            key: mongodb
+            db: id-me
+            schemata:
+                - { keys: { _type: 1, _id: 1 }, options: { unique: true } }
+    attributes:
+        name:
+            type: string
