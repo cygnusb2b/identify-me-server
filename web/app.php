@@ -14,7 +14,7 @@ if (!$env) {
 }
 $debug = 'dev' === $env;
 
-if ('prod' === $dev) {
+if ('prod' === $env) {
     $kernel = new AppKernel('prod', $debug);
 } else {
     $kernel = new AppKernel('dev', $debug);
