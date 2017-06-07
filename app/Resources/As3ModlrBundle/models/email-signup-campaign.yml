@@ -1,0 +1,19 @@
+email-signup-campaign:
+    entity:
+        persistence:
+            key: mongodb
+            db: id-me
+    attributes:
+        name:
+            type: string
+        callToAction:
+            type: string
+        description:
+            type: string
+        deploymentId:
+            type: string
+            description: 'The ID of the email deployment as stored in the external `service` database.'
+    relationships:
+        service:
+            type: one
+            entity: integration-service
