@@ -53,6 +53,7 @@ class IntegrationController extends AbstractController
                         'service' => 'omeda',
                         'identifier' => (string) $product['Id'],
                         'name' => $product['Description'],
+                        'fullName' => sprintf('%s (%s)', $product['Description'], $product['Id']),
                     ];
                 }
                 return new JsonResponse(['data' => $types]);

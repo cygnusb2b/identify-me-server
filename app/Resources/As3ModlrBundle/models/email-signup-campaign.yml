@@ -3,6 +3,8 @@ email-signup-campaign:
         persistence:
             key: mongodb
             db: id-me
+            schemata:
+                - { keys: { name: text } }
     attributes:
         name:
             type: string
@@ -10,9 +12,14 @@ email-signup-campaign:
             type: string
         description:
             type: string
+        buttonValue:
+            type: string
         deploymentId:
             type: string
             description: 'The ID of the email deployment as stored in the external `service` database.'
+        deploymentName:
+            type: string
+            description: 'The name of the email deployment as stored in the external `service` database.'
     relationships:
         service:
             type: one
