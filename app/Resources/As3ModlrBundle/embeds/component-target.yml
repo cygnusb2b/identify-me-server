@@ -1,0 +1,8 @@
+component-target:
+    attributes:
+        host:
+            type: string
+        path:
+            type: string
+        selector:
+            type: string

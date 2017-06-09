@@ -8,6 +8,8 @@ email-signup-campaign:
     attributes:
         name:
             type: string
+        promoCode:
+            type: string
         callToAction:
             type: string
         description:
@@ -20,6 +22,10 @@ email-signup-campaign:
         deploymentName:
             type: string
             description: 'The name of the email deployment as stored in the external `service` database.'
+    embeds:
+        targets:
+            type: many
+            entity: component-target
     relationships:
         service:
             type: one
