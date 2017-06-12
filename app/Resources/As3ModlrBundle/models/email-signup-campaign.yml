@@ -5,6 +5,8 @@ email-signup-campaign:
             db: id-me
             schemata:
                 - { keys: { name: text } }
+                - { keys: { deleted: 1 } }
+    mixins: [ 'soft-deleteable' ]
     attributes:
         name:
             type: string
