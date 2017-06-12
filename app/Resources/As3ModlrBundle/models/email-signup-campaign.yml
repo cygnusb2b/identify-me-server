@@ -16,6 +16,8 @@ email-signup-campaign:
             type: string
         buttonValue:
             type: string
+        previewUrl:
+            type: string
         deploymentId:
             type: string
             description: 'The ID of the email deployment as stored in the external `service` database.'
