@@ -2,6 +2,11 @@ as3_modlr_bundle:
     resource: "@As3ModlrBundle/Resources/config/routing.yml"
     defaults: { _format: json }
 
+app_bundle_component_manifest:
+    path: /component/manifest
+    defaults: { _controller: AppBundle:Component:manifest, _format: json }
+    methods: [ POST ]
+
 app_bundle_service_test:
     path: /service/test/{type}
     defaults: { _controller: AppBundle:Integration:serviceTest, _format: json }

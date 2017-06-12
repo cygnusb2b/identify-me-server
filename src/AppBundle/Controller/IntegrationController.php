@@ -11,10 +11,7 @@ class IntegrationController extends AbstractController
 {
     public function serviceTestAction($type, Request $request)
     {
-        $payload = @json_decode($request->getContent(), true);
-        if (!is_array($payload) || !isset($payload['data']) || !is_array($payload['data'])) {
-            throw new HttpException(400, 'Invalid payload request format.');
-        }
+        $payload = $this->parseJsonPayload($request);
         $data = $payload['data'];
         switch ($type) {
             case 'omeda':
