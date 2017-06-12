@@ -41,6 +41,7 @@ class ComponentController extends AbstractController
             throw new HttpException(400, 'Improper manifest format. Must include a location pathname.');
         }
         $criteria = [
+            'deleted'      => false,
             'targets.host' => $data['location']['hostname'],
             '$or'          => [
                 ['targets.path' => ['$exists' => false]],
