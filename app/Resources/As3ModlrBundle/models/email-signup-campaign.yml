@@ -24,6 +24,10 @@ email-signup-campaign:
         deploymentName:
             type: string
             description: 'The name of the email deployment as stored in the external `service` database.'
+        thankYouTitle:
+            type: string
+        thankYouBody:
+            type: string
     embeds:
         targets:
             type: many

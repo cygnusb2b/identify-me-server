@@ -1,0 +1,14 @@
+analytics:
+    entity:
+        abstract: true
+        polymorphic: true
+        persistence:
+            key: mongodb
+            db: id-me
+    attributes:
+        action:
+            type: string
+        date:
+            type: date
+        data:
+            type: object

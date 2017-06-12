@@ -1,0 +1,10 @@
+analytics-email-signup-campaign:
+    entity:
+        extends: analytics
+        persistence:
+            key: mongodb
+            db: id-me
+    relationships:
+        campaign:
+            type: one
+            entity: email-signup-campaign

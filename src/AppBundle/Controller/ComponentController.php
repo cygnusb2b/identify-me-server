@@ -8,6 +8,27 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ComponentController extends AbstractController
 {
+    public function analyticsAction(Request $request)
+    {
+        $payload = $this->parseJsonPayload($request);
+        $data = $payload['data'];
+        try {
+            if ('email-signup-campaign' === $data['type']) {
+                $model = $this->getStore()->create(sprintf('analytics-%s', $data['type']));
+                $model->set('action', $data['action']);
+                $model->set('data', new \MongoDate());
+                $model->set('campaign', $this->getStore()->find($data['type'], $data['identifier']));
+                $model->set('data', $data['data']);
+                $model->save();
+            } else {
+                throw new \Exception('The provided analytics type is not supported.');
+            }
+            return new JsonResponse(['data' => ['inserted' => true]]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['data' => ['inserted' => false]], 400);
+        }
+    }
+
     public function manifestAction(Request $request)
     {
         $payload = $this->parseJsonPayload($request);
@@ -37,7 +58,7 @@ class ComponentController extends AbstractController
                 'props'     => ['id' => $campaign->getId()],
             ];
 
-            foreach (['callToAction', 'description', 'buttonValue', 'previewUrl'] as $key) {
+            foreach (['callToAction', 'description', 'buttonValue', 'previewUrl', 'thankYouTitle', 'thankYouBody'] as $key) {
                 $value = $campaign->get($key);
                 if (!empty($value)) {
                     $component['props'][$key] = $value;
