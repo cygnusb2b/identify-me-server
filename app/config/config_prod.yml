@@ -1,6 +1,19 @@
 imports:
     - { resource: config.yml }
 
+as3_modlr:
+    persisters:
+        default:
+            type: mongodb
+            parameters:
+                host: mongodb://mongo.platform.baseplatform.io:27017
+                options:
+                    readPreference: nearest
+                    replicaSet: platform
+                    journal: true
+                    connectTimeoutMS: 200
+                    w: ~
+
 #doctrine:
 #    orm:
 #        metadata_cache_driver: apc
