@@ -26,6 +26,9 @@ email-signup-campaign:
         targets:
             type: many
             entity: component-target
+        cookies:
+            type: many
+            entity: identification-cookie
     relationships:
         service:
             type: one

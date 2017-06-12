@@ -1,0 +1,4 @@
+identification-cookie:
+    attributes:
+        name:
+            type: string
