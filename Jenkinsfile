@@ -8,6 +8,9 @@ node {
     container.pull()
     container.inside("-v ${env.WORKSPACE}:/var/www/html -u 0:0") {
       withEnv(['SYMFONY_ENV=prod', 'APP_ENV=prod']) {
+        stage('Clean') {
+          sh 'rm -rf node_modules bower_components tmp'
+        }
         stage('Composer') {
           sh "composer config -g github-oauth.github.com 0c32f31599c34beae4b8da4c06791d5cb6aad342"
           sh "composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader"
