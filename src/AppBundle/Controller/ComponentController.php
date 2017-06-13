@@ -55,7 +55,33 @@ class ComponentController extends AbstractController
                 'type'      => $campaign->getType(),
                 'selectors' => [],
                 'props'     => [],
+                'forms'     => [],
             ];
+
+            foreach ($campaign->get('forms') as $form) {
+                $formDef = [
+                    'name'   => $form->get('name'),
+                    'fields' => [],
+                ];
+                foreach ($form->get('fields') as $field) {
+                    $fieldDef = [];
+                    foreach ($field->getMetadata()->getAttributes() as $key => $meta) {
+                        $value = $field->get($key);
+                        if (!empty($value)) {
+                            $fieldDef[$key] = $value;
+                        }
+                    }
+                    $formDef['fields'][] = $fieldDef;
+                }
+                if (empty($formDef['fields'])) {
+                    continue;
+                }
+                $component['forms'][] = $formDef;
+            }
+
+            if (empty($component['forms'])) {
+                continue;
+            }
 
             $props = $campaign->get('props');
             if (null !== $props) {
