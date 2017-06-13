@@ -29,6 +29,43 @@ class IntegrationController extends AbstractController
         }
     }
 
+    public function demographicsAction($serviceId)
+    {
+        $service = $this->getStore()->find('integration-service', $serviceId);
+        switch ($service->getType()) {
+            case 'integration-service-omeda':
+                $options = [];
+                foreach (['clientKey', 'appId', 'inputId', 'brandKey'] as $key) {
+                    $options[$key] = $service->get($key);
+                }
+                $client = new OmedaClient($options);
+                $response = $client->parseApiResponse($client->brand->lookup());
+                $demos = [];
+                foreach ($response['Demographics'] as $demographic) {
+                    if (1 !== $demographic['DemographicType']) {
+                        continue;
+                    }
+                    $demo = [
+                        'key' => sprintf('omeda-%s', $demographic['Id']),
+                        'label' => $demographic['Description'],
+                        'fieldType' => 'select',
+                        'options' => [],
+                    ];
+                    $demo['options'][] = ['value' => '', 'label' => 'Please select...'];
+                    foreach ($demographic['DemographicValues'] as $value) {
+                        $demo['options'][] = [
+                            'value' => $value['Id'],
+                            'label' => $value['Description'],
+                        ];
+                    }
+                    $demos[] = $demo;
+                }
+                return new JsonResponse(['data' => $demos]);
+            default:
+                throw new HttpException(400, 'The provided integration service type is not yet supported.');
+        }
+    }
+
     public function deploymentTypesAction($serviceId)
     {
         $service = $this->getStore()->find('integration-service', $serviceId);
