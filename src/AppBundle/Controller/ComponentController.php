@@ -79,6 +79,13 @@ class ComponentController extends AbstractController
                 }
             }
 
+            foreach ($campaign->get('cookies') as $cookie) {
+                $name = $cookie->get('name');
+                if (!empty($name)) {
+                    $component['props']['cookies'][] = $name;
+                }
+            }
+
             $manifest[] = $component;
         }
         return new JsonResponse(['data' => $manifest]);
