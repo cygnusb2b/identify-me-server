@@ -22,5 +22,6 @@ node {
       if (!env.BRANCH_NAME.contains('PR-')) {
         step([$class: 'ArtifactArchiver', artifacts: '**'])
       }
+    }
   }
 }
