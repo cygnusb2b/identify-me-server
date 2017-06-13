@@ -13,17 +13,15 @@ class ComponentController extends AbstractController
         $payload = $this->parseJsonPayload($request);
         $data = $payload['data'];
         try {
-            if ('email-signup-campaign' === $data['type']) {
-                $model = $this->getStore()->create(sprintf('analytics-%s', $data['type']));
-                $model->set('action', $data['action']);
-                $model->set('data', new \MongoDate());
-                $model->set('campaign', $this->getStore()->find($data['type'], $data['identifier']));
-                $model->set('data', $data['data']);
-                $model->save();
-            } else {
-                throw new \Exception('The provided analytics type is not supported.');
-            }
-            return new JsonResponse(['data' => ['inserted' => true]]);
+            $model = $this->getStore()->create('campaign-event');
+            $model->set('action', $data['action']);
+            $model->set('date', new \MongoDate());
+            $model->set('data', $data['data']);
+
+            $campaign = $this->getStore()->find('campaign', $data['identifier']);
+            $model->set('campaign', $campaign);
+            $model->save();
+            return new JsonResponse(['data' => ['inserted' => $model->getId()]]);
         } catch (\Exception $e) {
             return new JsonResponse(['data' => ['inserted' => false]], 400);
         }
@@ -51,20 +49,24 @@ class ComponentController extends AbstractController
 
 
         $manifest = [];
-        $cursor = $this->getStore()->findQuery('email-signup-campaign', $criteria);
+        $cursor = $this->getStore()->findQuery('campaign', $criteria);
         foreach ($cursor as $campaign) {
             $component = [
-                'name'      => 'EmailSignupCampaign',
+                'type'      => $campaign->getType(),
                 'selectors' => [],
-                'props'     => ['id' => $campaign->getId()],
+                'props'     => [],
             ];
 
-            foreach (['callToAction', 'description', 'buttonValue', 'previewUrl', 'thankYouTitle', 'thankYouBody'] as $key) {
-                $value = $campaign->get($key);
-                if (!empty($value)) {
-                    $component['props'][$key] = $value;
+            $props = $campaign->get('props');
+            if (null !== $props) {
+                foreach ($props->getMetadata()->getAttributes() as $key => $meta) {
+                    $value = $props->get($key);
+                    if (!empty($value)) {
+                        $component['props'][$key] = $value;
+                    }
                 }
             }
+            $component['props']['id'] = $campaign->getId();
 
             foreach ($campaign->get('targets') as $target) {
                 if ($target->get('host') === $data['location']['hostname']) {

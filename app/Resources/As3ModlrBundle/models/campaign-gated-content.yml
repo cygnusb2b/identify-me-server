@@ -1,0 +1,10 @@
+campaign-gated-content:
+    entity:
+        extends: campaign
+        persistence:
+            key: mongodb
+            db: id-me
+    embeds:
+        props:
+            type: one
+            entity: gated-content-props

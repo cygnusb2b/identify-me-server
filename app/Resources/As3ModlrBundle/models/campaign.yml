@@ -1,0 +1,28 @@
+campaign:
+    entity:
+        abstract: true
+        polymorphic: true
+        persistence:
+            key: mongodb
+            db: id-me
+            schemata:
+                - { keys: { name: text } }
+                - { keys: { _type: 1, _id: 1 }, options: { unique: true } }
+                - { keys: { deleted: 1 } }
+    mixins: [ 'soft-deleteable' ]
+    attributes:
+        name:
+            type: string
+        promoCode:
+            type: string
+    embeds:
+        targets:
+            type: many
+            entity: component-target
+        cookies:
+            type: many
+            entity: identification-cookie
+    relationships:
+        service:
+            type: one
+            entity: integration-service

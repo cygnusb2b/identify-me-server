@@ -1,0 +1,17 @@
+campaign-email-signup:
+    entity:
+        extends: campaign
+        persistence:
+            key: mongodb
+            db: id-me
+    attributes:
+        deploymentId:
+            type: string
+            description: 'The ID of the email deployment as stored in the external `service` database.'
+        deploymentName:
+            type: string
+            description: 'The name of the email deployment as stored in the external `service` database.'
+    embeds:
+        props:
+            type: one
+            entity: email-signup-props

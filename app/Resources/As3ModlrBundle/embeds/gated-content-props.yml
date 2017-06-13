@@ -1,0 +1,12 @@
+gated-content-props:
+    attributes:
+        title:
+            type: string
+        description:
+            type: string
+        fullRegisterDescription:
+            type: string
+        registerUrl:
+            type: string
+        buttonValue:
+            type: string

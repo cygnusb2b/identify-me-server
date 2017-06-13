@@ -1,10 +1,10 @@
-analytics:
+campaign-event:
     entity:
-        abstract: true
-        polymorphic: true
         persistence:
             key: mongodb
             db: id-me
+            schemata:
+                - { keys: { campaign: 1 } }
     attributes:
         action:
             type: string
@@ -12,3 +12,7 @@ analytics:
             type: date
         data:
             type: object
+    relationships:
+        campaign:
+            type: one
+            entity: campaign

@@ -1,0 +1,14 @@
+email-signup-props:
+    attributes:
+        callToAction:
+            type: string
+        description:
+            type: string
+        buttonValue:
+            type: string
+        previewUrl:
+            type: string
+        thankYouTitle:
+            type: string
+        thankYouBody:
+            type: string
