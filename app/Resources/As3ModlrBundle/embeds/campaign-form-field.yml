@@ -1,0 +1,16 @@
+campaign-form-field:
+    attributes:
+        key:
+            type: string
+            defaultValue: ''
+        label:
+            type: string
+        fieldType:
+            type: string
+        required:
+            type: boolean
+            defaultValue: false
+        options:
+            type: array
+            defaultValue: []
+

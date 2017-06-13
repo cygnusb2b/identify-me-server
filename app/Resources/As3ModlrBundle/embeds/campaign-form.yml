@@ -1,0 +1,11 @@
+campaign-form:
+    attributes:
+        name:
+            type: string
+        active:
+            type: boolean
+            defaultValue: true
+    embeds:
+        fields:
+            type: many
+            entity: campaign-form-field

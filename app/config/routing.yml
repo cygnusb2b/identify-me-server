@@ -17,6 +17,11 @@ app_bundle_service_test:
     defaults: { _controller: AppBundle:Integration:serviceTest, _format: json }
     methods: [ POST ]
 
+app_bundle_service_demographics:
+    path: /service/demographics/{serviceId}
+    defaults: { _controller: AppBundle:Integration:demographics, _format: json }
+    methods: [ GET ]
+
 app_bundle_service_deployment_types:
     path: /service/deployment-types/{serviceId}
     defaults: { _controller: AppBundle:Integration:deploymentTypes, _format: json }

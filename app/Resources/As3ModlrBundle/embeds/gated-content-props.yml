@@ -4,8 +4,6 @@ gated-content-props:
             type: string
         description:
             type: string
-        fullRegisterDescription:
-            type: string
         registerUrl:
             type: string
         buttonValue:

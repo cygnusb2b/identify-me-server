@@ -22,6 +22,9 @@ campaign:
         cookies:
             type: many
             entity: identification-cookie
+        forms:
+            type: many
+            entity: campaign-form
     relationships:
         service:
             type: one
