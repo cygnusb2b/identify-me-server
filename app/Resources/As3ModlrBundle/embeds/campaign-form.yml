@@ -1,5 +1,7 @@
 campaign-form:
     attributes:
+        identifier:
+            type: string
         name:
             type: string
         active:

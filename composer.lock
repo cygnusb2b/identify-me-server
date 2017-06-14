@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "as3/modlr",
-            "version": "0.3.21",
+            "version": "0.3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/as3io/modlr.git",
-                "reference": "ab7c1a6fdbc04b9aa694aa6d90e9e48b703f6bbe"
+                "reference": "39f0326b6b949efb6248baf091ee75d6afd89aa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/as3io/modlr/zipball/ab7c1a6fdbc04b9aa694aa6d90e9e48b703f6bbe",
-                "reference": "ab7c1a6fdbc04b9aa694aa6d90e9e48b703f6bbe",
+                "url": "https://api.github.com/repos/as3io/modlr/zipball/39f0326b6b949efb6248baf091ee75d6afd89aa8",
+                "reference": "39f0326b6b949efb6248baf091ee75d6afd89aa8",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "Simplified PHP library for fast and efficient RESTful API for MongoDB. Designed for use with front end web frameworks such as EmberJS.",
-            "time": "2017-03-02T16:27:07+00:00"
+            "time": "2017-06-14T15:19:58+00:00"
         },
         {
             "name": "as3/modlr-api-jsonapiorg",

@@ -33,6 +33,12 @@ services:
         class: AppBundle\Controller\ExceptionController
         arguments: ['@twig', '%kernel.debug%']
 
+    app_bundle.event_subscriber.campaign:
+        private: true
+        class: AppBundle\EventSubscriber\CampaignSubscriber
+        tags:
+            - { name: as3_modlr.event_subscriber }
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
