@@ -2,6 +2,11 @@ as3_modlr_bundle:
     resource: "@As3ModlrBundle/Resources/config/routing.yml"
     defaults: { _format: json }
 
+app_bundle_analytics_campaign:
+    path: /analytics/campaign/{campaignId}/{formId}
+    defaults: { _controller: AppBundle:Analytics:campaign, _format: json }
+    methods: [ GET ]
+
 app_bundle_component_analytics:
     path: /component/analytics
     defaults: { _controller: AppBundle:Component:analytics, _format: json }
