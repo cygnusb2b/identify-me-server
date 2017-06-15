@@ -29,6 +29,9 @@ class ComponentController extends AbstractController
 
     public function manifestAction(Request $request)
     {
+        if (true === $this->isBot($request->headers->get('USER_AGENT'))) {
+            return new JsonResponse(['data' => []]);
+        }
         $payload = $this->parseJsonPayload($request);
         $data = $payload['data'];
 
@@ -120,5 +123,16 @@ class ComponentController extends AbstractController
             $manifest[] = $component;
         }
         return new JsonResponse(['data' => $manifest]);
+    }
+
+    private function isBot($userAgent)
+    {
+        $patterns = ['googlebot\\/', 'Googlebot-Mobile', 'Googlebot-Image', 'Mediapartners-Google', 'bingbot', 'slurp'];
+        foreach ($patterns as $pattern) {
+            if (preg_match(sprintf('/%s/i', $pattern), $userAgent)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
