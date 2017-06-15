@@ -55,11 +55,26 @@ class ComponentController extends AbstractController
                 'type'      => $campaign->getType(),
                 'selectors' => [],
                 'props'     => [],
-                'forms'     => [],
             ];
 
+            $props = $campaign->get('props');
+            if (null !== $props) {
+                foreach ($props->getMetadata()->getAttributes() as $key => $meta) {
+                    $value = $props->get($key);
+                    if (!empty($value)) {
+                        $component['props'][$key] = $value;
+                    }
+                }
+            }
+            $component['props']['id'] = $campaign->getId();
+            $component['props']['forms'] = [];
+
             foreach ($campaign->get('forms') as $form) {
+                if (false === $form->get('active')) {
+                    continue;
+                }
                 $formDef = [
+                    'identifier' => $form->get('identifier'),
                     'name'   => $form->get('name'),
                     'fields' => [],
                 ];
@@ -76,23 +91,13 @@ class ComponentController extends AbstractController
                 if (empty($formDef['fields'])) {
                     continue;
                 }
-                $component['forms'][] = $formDef;
+                $component['props']['forms'][] = $formDef;
             }
 
-            if (empty($component['forms'])) {
+            if (empty($component['props']['forms'])) {
                 continue;
             }
 
-            $props = $campaign->get('props');
-            if (null !== $props) {
-                foreach ($props->getMetadata()->getAttributes() as $key => $meta) {
-                    $value = $props->get($key);
-                    if (!empty($value)) {
-                        $component['props'][$key] = $value;
-                    }
-                }
-            }
-            $component['props']['id'] = $campaign->getId();
 
             foreach ($campaign->get('targets') as $target) {
                 if ($target->get('host') === $data['location']['hostname']) {

@@ -54,7 +54,7 @@ class IntegrationController extends AbstractController
                     $demo['options'][] = ['value' => '', 'label' => 'Please select...'];
                     foreach ($demographic['DemographicValues'] as $value) {
                         $demo['options'][] = [
-                            'value' => $value['Id'],
+                            'value' => sprintf('omeda-%s-%s',$demographic['Id'], $value['Id']),
                             'label' => $value['Description'],
                         ];
                     }
