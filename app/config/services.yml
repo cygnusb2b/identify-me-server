@@ -39,6 +39,12 @@ services:
         tags:
             - { name: as3_modlr.event_subscriber }
 
+    app_bundle.cors.listener:
+        private: true
+        class: AppBundle\Cors\CorsListener
+        tags:
+            - { name: kernel.event_subscriber }
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
