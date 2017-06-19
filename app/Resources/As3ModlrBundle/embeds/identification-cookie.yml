@@ -2,3 +2,7 @@ identification-cookie:
     attributes:
         name:
             type: string
+        expires:
+            type: integer
+        value:
+            type: string

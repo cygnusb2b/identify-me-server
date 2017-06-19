@@ -22,6 +22,9 @@ campaign:
         cookies:
             type: many
             entity: identification-cookie
+        setCookies:
+            type: many
+            entity: identification-cookie
         forms:
             type: many
             entity: campaign-form

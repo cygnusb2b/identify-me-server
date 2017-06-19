@@ -120,6 +120,19 @@ class ComponentController extends AbstractController
                 }
             }
 
+            foreach ($campaign->get('setCookies') as $cookie) {
+                $name = $cookie->get('name');
+                $value = $cookie->get('value');
+                $expires = $cookie->get('expires') ?: 60 * 60 * 24 * 365 * 2;
+                if (!empty($name) && !empty($value)) {
+                    $component['props']['setCookies'][] = [
+                        'name'  => $name,
+                        'value' => $value,
+                        'expires' => $expires,
+                    ];
+                }
+            }
+
             $manifest[] = $component;
         }
         return new JsonResponse(['data' => $manifest]);
