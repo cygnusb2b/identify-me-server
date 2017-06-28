@@ -7,6 +7,11 @@ app_bundle_analytics_campaign:
     defaults: { _controller: AppBundle:Analytics:campaign, _format: json }
     methods: [ GET ]
 
+app_bundle_health_check:
+    path: /health-check
+    defaults: { _controller: AppBundle:Default:healthCheck, _format: json }
+    methods: [ GET ]
+
 app_bundle_component_analytics:
     path: /component/analytics
     defaults: { _controller: AppBundle:Component:analytics, _format: json }
