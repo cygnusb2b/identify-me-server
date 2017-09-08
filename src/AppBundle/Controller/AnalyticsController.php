@@ -10,6 +10,8 @@ class AnalyticsController extends AbstractController
 {
     public function campaignAction($campaignId, $formId)
     {
+        ini_set('memory_limit','1G');
+        
         $actions = ['render', 'view', 'focus', 'submit'];
         $pipeline = [];
         $pipeline[] = ['$match' => [
