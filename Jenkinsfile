@@ -1,5 +1,5 @@
 node {
-  def phpBuilder = docker.image("limit0/php5.6:latest")
+  def phpBuilder = docker.image("limit0/php56:latest")
   phpBuilder.pull()
 
   // Test
